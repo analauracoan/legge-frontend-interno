@@ -8,42 +8,20 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import logo from '../../assets/logo_escrita.svg';
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ViewListIcon from '@mui/icons-material/ViewList';
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-
-const Item = ({ title, to, icon, selected, setSelected }) => {
-    const theme = useMemo(() => createTheme(themeSettings()), []);
-    const colors = theme.palette;
-
-    return (
-      <MenuItem
-        active={selected === title}
-        style={{
-          color: colors.neutral.main,
-        }}
-        onClick={() => setSelected(title)}
-        icon={icon}
-      >
-        <Typography>{title}</Typography>
-        <Link to={to} />
-      </MenuItem>
-    );
-  };
+import TypeSpecimenOutlinedIcon from '@mui/icons-material/TypeSpecimenOutlined';
+import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 const Sidebar = () => {
     const theme = useMemo(() => createTheme(themeSettings()), []);
     const colors = theme.palette;
     
     const [isCollapsed, setIsCollapsed] = useState(false);
-    const [selected, setSelected] = useState("Dashboard");
+    const [isMenuNormaOpen, setIsMenuNormaOpen] = useState(true);
+    const [isMenuAdmOpen, setIsMenuAdmOpen] = useState(true);
 
     return (
 
@@ -67,7 +45,7 @@ const Sidebar = () => {
             }}
         >
             <ProSidebar collapsed={isCollapsed}>
-                <Menu iconShape="square">
+                <Menu>
                     {/* LOGO E ICONE MENU */}
                     <MenuItem
                         onClick={() => setIsCollapsed(!isCollapsed)}
@@ -92,93 +70,70 @@ const Sidebar = () => {
                     </MenuItem>
 
                     {/* MENU ICONES */}
-                    <Box pl={isCollapsed ? undefined : "2%"}>
-                        <Item
-                            title="Dashboard"
-                            to="/"
-                            icon={<HomeOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        {!isCollapsed && <Typography
-                            variant="h6"
-                            color={colors.grey[300]}
-                            sx={{ m: "15px 0 5px 20px" }}
-                        >
-                        Normas
-                        </Typography>}
-                        <Item
-                            title="Listar"
-                            to="/listagem"
-                            icon={<ViewListIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Cadastrar"
-                            to="/contacts"
-                            icon={<ContactsOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Compilar"
-                            to="/invoices"
-                            icon={<ReceiptOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-
-                        {!isCollapsed && <Typography
-                            variant="h6"
-                            color={colors.grey[300]}
-                            sx={{ m: "15px 0 5px 20px" }}
-                        >
-                        Comunicação
-                        </Typography>}
-                        <Item
-                            title="Canal de envio"
-                            to="/form"
-                            icon={<PersonOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="FAQ legislativo"
-                            to="/faq"
-                            icon={<HelpOutlineOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-
-                        {!isCollapsed && <Typography
-                            variant="h6"
-                            color={colors.grey[300]}
-                            sx={{ m: "15px 0 5px 20px" }}
-                        >
-                        Gerenciamento e estatísticas
-                        </Typography>}
-                        <Item
-                            title="Pendências"
-                            to="/geography"
-                            icon={<MapOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Estatísticas"
-                            to="/bar"
-                            icon={<BarChartOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title="Gerência Kanban"
-                            to="/geography"
-                            icon={<MapOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
+                    <Box>
+                        <MenuItem
+                            style={{color: colors.white.main}}
+                            icon={<HomeOutlinedIcon />}>
+                            <Typography>
+                                Dashboard
+                            </Typography>
+                        </MenuItem>
+                        <MenuItem
+                            style={{color: colors.white.main, backgroundColor: colors.primary.dark}}
+                            icon={isMenuNormaOpen ? <KeyboardArrowUpOutlinedIcon /> : <KeyboardArrowDownOutlinedIcon /> }
+                            onClick={() => setIsMenuNormaOpen(!isMenuNormaOpen)}>
+                            <Typography>
+                                Município
+                            </Typography>
+                        </MenuItem>
+                        {isMenuNormaOpen && (
+                        <Box>
+                            <MenuItem 
+                                style={{color: colors.white.main}}
+                                icon={<ViewListIcon />}>
+                                <Typography>
+                                    Normas
+                                </Typography>
+                                <Link to={"/interno/normas"} />
+                            </MenuItem>
+                            <MenuItem 
+                                style={{color: colors.white.main}}
+                                icon={<TypeSpecimenOutlinedIcon />}>
+                                <Typography>
+                                    Tipos de Normas
+                                </Typography>
+                                <Link to={"/normas/tipos"} />
+                            </MenuItem>        
+                        </Box>
+                        )}
+                        <MenuItem
+                            style={{color: colors.white.main, backgroundColor: colors.primary.dark}}
+                            icon={isMenuAdmOpen ? <KeyboardArrowUpOutlinedIcon /> : <KeyboardArrowDownOutlinedIcon /> }
+                            onClick={() => setIsMenuAdmOpen(!isMenuAdmOpen)}>
+                            <Typography>
+                                Administração
+                            </Typography>
+                        </MenuItem>
+                        {isMenuAdmOpen && (
+                        <Box>
+                            <MenuItem 
+                                style={{color: colors.white.main}}
+                                icon={<PublicOutlinedIcon />}>
+                                <Typography>
+                                    Municípios
+                                </Typography>
+                                <Link to={"/login"} />
+                            </MenuItem>
+                            <MenuItem 
+                                style={{color: colors.white.main}}
+                                icon={<AccountCircleOutlinedIcon />}>
+                                <Typography>
+                                    Usuários
+                                </Typography>
+                                <Link to={"/usuario"} />
+                            </MenuItem>        
+                        </Box>
+                        )}
                     </Box>
                 </Menu>
             </ProSidebar>

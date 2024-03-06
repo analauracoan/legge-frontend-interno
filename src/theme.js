@@ -1,11 +1,9 @@
-import { createContext, useState, useMemo } from "react";
-import { createTheme } from '@mui/material';
-
 export const themeSettings = () => {
     return {
         palette: {
             primary: {
                 main: '#025464',
+                dark: '#024A58',
             },
             secondary: {
                 main: '#E57C23',
@@ -19,6 +17,9 @@ export const themeSettings = () => {
             black: {
                 main: '#000000',
             },
+            white: {
+                main: '#FFFFFF',
+            }
         },
         typography: {
             fontFamily: ["Plus Jakarta Sans", "sans-serif"].join(","),
