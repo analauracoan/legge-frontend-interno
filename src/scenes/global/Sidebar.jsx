@@ -1,7 +1,9 @@
+import * as React from "react";
 import { useState, useMemo, useContext, useEffect } from "react";
 import { createTheme } from "@mui/material";
 import { themeSettings } from "../../theme";
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { Menu, MenuItem } from "react-pro-sidebar";
+import { ProSidebar } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import 'react-pro-sidebar/dist/css/styles.css';
@@ -15,7 +17,7 @@ import TypeSpecimenOutlinedIcon from '@mui/icons-material/TypeSpecimenOutlined';
 import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { AuthContext } from "../../contexts/Auth/AuthContext";
-import ListagemNormas from "../normas/listagemNormas";
+import "react-pro-sidebar/dist/css/styles.css";
 
 const Sidebar = () => {
     const theme = useMemo(() => createTheme(themeSettings()), []);
@@ -141,7 +143,7 @@ const Sidebar = () => {
                                 <Typography>
                                     Municípios
                                 </Typography>
-                                <Link to={"/login"} />
+                                <Link to={"/municipios"} />
                                 </MenuItem>
 
                                 <MenuItem

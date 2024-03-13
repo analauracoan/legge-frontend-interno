@@ -12,8 +12,9 @@ import { RequireAuth } from './contexts/Auth/RequireAuth.jsx';
 import Login from "./scenes/login" 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css'; 
-import ListagemNormas from './scenes/normas/listagemNormas/index.jsx';
 import EditarUsuario from './scenes/usuarios/editarUsuario/index.jsx';
+import ListagemMunicipios from './scenes/municipios/listagemMunicipios/index.jsx';
+import CadastroMunicipio from './scenes/municipios/cadastroMunicipio/index.jsx';
 
 const interno = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const interno = createBrowserRouter([
       {
         path: "/municipios",
         element: <ListagemMunicipios />,
+      },
+      {
+        path: "/municipios/cadastro",
+        element: <CadastroMunicipio />,
       },
       {
         path: "/usuarios",

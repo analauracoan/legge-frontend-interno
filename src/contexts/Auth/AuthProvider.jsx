@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import { useApi } from "../../hooks/useApi";

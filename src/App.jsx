@@ -1,7 +1,7 @@
+import * as React from "react";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
-import { Routes, Route } from "react-router-dom";
 import { themeSettings } from "./theme";
 import { useMemo, useState } from "react";
 import { Outlet } from "react-router-dom";

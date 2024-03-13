@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect, useMemo, useContext } from "react";
 import { Typography, createTheme } from "@mui/material";
@@ -148,7 +149,7 @@ const EditarUsuario = () => {
                         />
                         <label>
                             <Checkbox checked={toggle} onChange={e => {handleChange(e);setToggle(!toggle);}} name="senha" />
-                            Deseja trocar a senha? {toggle ? "Sim" : "Não"}
+                            Deseja trocar a senha?
                         </label>
                         {toggle && <TextField
                             variant="filled"

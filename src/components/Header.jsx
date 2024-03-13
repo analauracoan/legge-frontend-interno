@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Typography, Box, createTheme, Tooltip, IconButton } from "@mui/material";
 import { themeSettings } from "../theme";
 import { useMemo } from "react";
@@ -6,7 +7,6 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 const Header = ({ titulo, legenda, show, espaco }) => {
     const theme = useMemo(() => createTheme(themeSettings()), []);
     const colors = theme.palette;
-
 
     return ( 
     
