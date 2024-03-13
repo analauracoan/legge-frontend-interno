@@ -9,9 +9,9 @@ import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import { toast } from "react-toastify";
 
 const initialValues = {
-  nome: "",
-  autenticacao_login: "",
-  autenticacao_senha: "",
+  nome: '',
+  autenticacao_login: '',
+  autenticacao_senha: ''
 }
 
 const espacosRegex = /^[^\s\t]+$/;
@@ -39,23 +39,28 @@ const cadastroSchema = yup.object().shape({
     .matches(numeroRegex, "Deve ter ao menos um número"),
 })
 
-const Cadastro = () => {
+const CadastroUsuario = () => {
 
   const api = useApi();
   const auth = useContext(AuthContext);
   const token = auth.cookies.get('authToken');
 
-  const createPost = (values) => {
+  const createPost = (values, { resetForm }) => {
     const envio = {
       nome: values.nome,
       autenticacao_login: values.autenticacao_login,
       autenticacao_senha: md5(values.autenticacao_senha)
     }
     api.post('interno/administracao/usuarios', envio, token)
-      .then(response => {if(response.mensagem) {toast.error(response.mensagem)} else if(response.iduu) {toast.success('Usuário cadastrado com sucesso!')} else {toast(response)}}).catch(error => toast.error(error))
-
-  } 
-
+      .then(response => 
+        {if(response.mensagem) 
+          {toast.error(response.mensagem)}
+        else if(response.iduu) 
+          {toast.success('Usuário cadastrado com sucesso!');
+          resetForm({ values: '' })}  
+        else {toast(response)}}).catch(error => toast.error(error));
+  }
+  
   return (
     <Box m="0 20px">
         <Header titulo="Cadastro de Usuário" show={false} espaco={"25px"} />
@@ -129,4 +134,4 @@ const Cadastro = () => {
   )
 }
 
-export default Cadastro;
+export default CadastroUsuario;

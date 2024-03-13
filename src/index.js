@@ -4,7 +4,7 @@ import './index.css';
 import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Dashboard from "./scenes/dashboard";
-import Cadastro from "./scenes/usuarios/cadastro";
+import CadastroUsuario from "./scenes/usuarios/cadastroUsuario/index.jsx";
 import ErrorPage from './scenes/errorPage';
 import ListagemUsuarios from './scenes/usuarios/listagemUsuarios';
 import { AuthProvider } from './contexts/Auth/AuthProvider.jsx';
@@ -12,6 +12,8 @@ import { RequireAuth } from './contexts/Auth/RequireAuth.jsx';
 import Login from "./scenes/login" 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css'; 
+import ListagemNormas from './scenes/normas/listagemNormas/index.jsx';
+import EditarUsuario from './scenes/usuarios/editarUsuario/index.jsx';
 
 const interno = createBrowserRouter([
   {
@@ -24,12 +26,20 @@ const interno = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "/usuario",
+        path: "/municipios",
+        element: <ListagemMunicipios />,
+      },
+      {
+        path: "/usuarios",
         element: <ListagemUsuarios />,
       },
       {
-        path: "/usuario/cadastro",
-        element: <Cadastro />,
+        path: "/usuarios/cadastro",
+        element: <CadastroUsuario />,
+      },
+      {
+        path: "/usuarios/edicao/:userIduu",
+        element: <EditarUsuario />,
       }
     ]
   },

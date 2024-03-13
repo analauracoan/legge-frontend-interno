@@ -9,6 +9,10 @@ import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { GridToolbar } from "@mui/x-data-grid";
+import { IconButton } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { toast } from "react-toastify";
 
 const ListagemUsuarios = () => {
     const theme = useMemo(() => createTheme(themeSettings()), []);
@@ -25,22 +29,53 @@ const ListagemUsuarios = () => {
         api.get('interno/administracao/usuarios', token).then(response => setData(response.resultados));
     }, []);
 
-    console.log(data);
     const tamanho = data?.length;
 
     for (let i = 0; i < tamanho; i++) {
       const nome = data[i].nome;
-      const objeto = {nome: `${nome}`};
+      const iduu = data[i].iduu;
+      const objeto = {iduu: iduu, nome: `${nome}`};
       novosDados.push(objeto);
     };
 
-    const rows = novosDados;
-
-    console.log(novosDados);
+    const deleteUser = (iduu) => {
+        api.delete(`interno/administracao/usuarios/${iduu}`, token)
+        .then(response => 
+            {if(response.status !== 204) 
+                {toast.error(response.mensagem)}
+            else if(response.status === 204) 
+                {toast.success('Usuário deletado com sucesso!');
+                api.get('interno/administracao/usuarios', token).then(response => setData(response.resultados));
+                }
+            else {toast(response)}
+        })
+        .catch(error => toast.error(error));
+    }
 
     const columns = [
-        { field: "nome", headerName: "Nome Completo", width: 500 },
+        { field: "nome", headerName: "Nome Completo", flex: 10 },
+        { 
+            field: "acoes", 
+            headerName: "Ações", 
+            flex: 1,
+            renderCell: (params) => (
+                <div>
+                    <Link to={`/usuarios/edicao/${params.row.iduu}`}>
+                        <IconButton aria-label="editar">
+                            <EditIcon />
+                        </IconButton>
+                    </Link>
+                    <IconButton aria-label="apagar" onClick={() => deleteUser(params.row.iduu)}>
+                        <DeleteIcon />
+                    </IconButton>
+                </div>
+              ),
+        },
     ]
+      
+    function handleDelete(id) {
+        console.log(`Apagar linha com ID: ${id}`);
+    }
 
     return (
 
@@ -53,10 +88,11 @@ const ListagemUsuarios = () => {
                     </Link>
                 </Button>
             </Box>
-            <Box sx={{ height: '70%', width: '100%', "& .MuiDataGrid-columnHeaders": {backgroundColor: theme.palette.neutral.main} }}>
+            <Box sx={{ width: '100%', "& .MuiDataGrid-columnHeaders": {backgroundColor: theme.palette.neutral.main} }}>
                 <DataGrid
                     rows={novosDados}
                     getRowId={(row) => row.nome}
+                    
                     columns={columns}
                     initialState={{
                         pagination: {
@@ -68,6 +104,7 @@ const ListagemUsuarios = () => {
                     pageSizeOptions={[5]}
                     slots={{ toolbar: GridToolbar }}
                     disableRowSelectionOnClick
+                    autoHeight
                 />
             </Box>
         </Box>

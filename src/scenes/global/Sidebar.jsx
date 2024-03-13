@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext, useEffect } from "react";
 import { createTheme } from "@mui/material";
 import { themeSettings } from "../../theme";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
@@ -14,6 +14,8 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import TypeSpecimenOutlinedIcon from '@mui/icons-material/TypeSpecimenOutlined';
 import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { AuthContext } from "../../contexts/Auth/AuthContext";
+import ListagemNormas from "../normas/listagemNormas";
 
 const Sidebar = () => {
     const theme = useMemo(() => createTheme(themeSettings()), []);
@@ -22,6 +24,19 @@ const Sidebar = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [isMenuNormaOpen, setIsMenuNormaOpen] = useState(true);
     const [isMenuAdmOpen, setIsMenuAdmOpen] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    const auth = useContext(AuthContext);
+    const nome = auth.cookies.get('usuario');
+
+    useEffect (() => {
+        if(nome === "ADMINISTRAÇÃO") {
+            setIsAdmin(true);
+        } else {
+            setIsAdmin(false);
+        }
+    })
+
 
     return (
 
@@ -94,7 +109,7 @@ const Sidebar = () => {
                                 <Typography>
                                     Normas
                                 </Typography>
-                                <Link to={"/interno/normas"} />
+                                <Link to={"/norma"} />
                             </MenuItem>
                             <MenuItem 
                                 style={{color: colors.white.main}}
@@ -106,32 +121,40 @@ const Sidebar = () => {
                             </MenuItem>        
                         </Box>
                         )}
-                        <MenuItem
-                            style={{color: colors.white.main, backgroundColor: colors.primary.dark}}
-                            icon={isMenuAdmOpen ? <KeyboardArrowUpOutlinedIcon /> : <KeyboardArrowDownOutlinedIcon /> }
-                            onClick={() => setIsMenuAdmOpen(!isMenuAdmOpen)}>
-                            <Typography>
-                                Administração
-                            </Typography>
-                        </MenuItem>
-                        {isMenuAdmOpen && (
+                        {isAdmin && (
                         <Box>
-                            <MenuItem 
-                                style={{color: colors.white.main}}
-                                icon={<PublicOutlinedIcon />}>
+                            <MenuItem
+                                style={{ color: colors.white.main, backgroundColor: colors.primary.dark }}
+                                icon={isMenuAdmOpen ? <KeyboardArrowUpOutlinedIcon /> : <KeyboardArrowDownOutlinedIcon />}
+                                onClick={() => setIsMenuAdmOpen(!isMenuAdmOpen)}
+                            >
+                                <Typography>
+                                Administração
+                                </Typography>
+                            </MenuItem>
+                            {isMenuAdmOpen && (
+                            <Box>
+                                <MenuItem
+                                style={{ color: colors.white.main }}
+                                icon={<PublicOutlinedIcon />}
+                                >
                                 <Typography>
                                     Municípios
                                 </Typography>
                                 <Link to={"/login"} />
-                            </MenuItem>
-                            <MenuItem 
-                                style={{color: colors.white.main}}
-                                icon={<AccountCircleOutlinedIcon />}>
+                                </MenuItem>
+
+                                <MenuItem
+                                style={{ color: colors.white.main }}
+                                icon={<AccountCircleOutlinedIcon />}
+                                >
                                 <Typography>
                                     Usuários
                                 </Typography>
-                                <Link to={"/usuario"} />
-                            </MenuItem>        
+                                <Link to={"/usuarios"} />
+                                </MenuItem>
+                            </Box>
+                            )}
                         </Box>
                         )}
                     </Box>

@@ -32,10 +32,14 @@ const Topbar = ({ paginacao }) => {
 
             {/* ICONS */}
             <Box display="flex">
-                <p style={{padding: '2px'}}>{auth.cookies.get('usuario')}</p>
-                <IconButton>
-                    <PersonOutlinedIcon />
-                </IconButton>
+                <Box display={'flex'}>
+                    <Typography variant="p" display={'flex'} alignItems={'center'} fontWeight={'bold'} >
+                        {auth.cookies.get('usuario')}
+                    </Typography>
+                    <IconButton>
+                        <PersonOutlinedIcon />
+                    </IconButton>
+                </Box>
                 <IconButton onClick={handleLogout} >
                     <LogoutOutlinedIcon />
                 </IconButton>

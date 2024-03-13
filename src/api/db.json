@@ -1,0 +1,57 @@
+{
+    "norma_geral": [
+        { 
+            "id": 1, 
+            "createdAt": "2024-03-11T12:30:00.000Z",
+            "tipoId": 1,
+            "numero": 3521,
+            "ano": 2024,
+            "data": "2024-03-11",
+            "ementa": "Altera a Lei Complementar nº 345 e dá outras providências",
+            "materia_origem": "Projeto de Lei Complementar nº 34/2023",
+            "interesseId": 1,
+            "anexo": "www.anexo.com.br",
+            "vigencia": "2024-03-11",
+            "statusId": 1
+        }
+    ],
+    "norma_tipo": [
+        {
+            "id": 1,
+            "tipo": "Lei Complementar"
+        },
+        {
+            "id": 2,
+            "tipo": "Lei Ordinária"
+        }
+    ],
+    "norma_interesse": [
+        {
+            "id": 1,
+            "area_interesse": "Saúde"
+        }
+    ],
+    "norma_status": [
+        {
+            "id": 1,
+            "status": "Sancionada"
+        }
+    ],
+    "norma_dispositivo": [
+        {
+            "id": 1,
+            "normaId": 1,
+            "tipoId": 1,
+            "numero": "1º",
+            "texto": "Ficam acrescidas 4 (quatro) vagas para o cargo de Agente Motorista Caçambeiro Lastreador - Obras, totalizando 12 (vagas) vagas para o referido cargo."
+        }
+    ],
+    "norma_dispositivo_tipo": [
+        {
+            "id": 1,
+            "tipo_dispositivo": "Artigo",
+            "abreviacao": "Art."
+        }
+    ]
+
+}
