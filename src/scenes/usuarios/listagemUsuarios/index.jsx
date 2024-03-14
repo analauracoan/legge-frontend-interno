@@ -54,11 +54,11 @@ const ListagemUsuarios = () => {
     }
 
     const columns = [
-        { field: "nome", headerName: "Nome Completo", flex: 10 },
+        { field: "nome", headerName: "Nome Completo", width: 800 },
         { 
             field: "acoes", 
             headerName: "Ações", 
-            flex: 1,
+            width: 200,
             renderCell: (params) => (
                 <div>
                     <Link to={`/usuarios/edicao/${params.row.iduu}`}>
@@ -73,23 +73,19 @@ const ListagemUsuarios = () => {
               ),
         },
     ]
-      
-    function handleDelete(id) {
-        console.log(`Apagar linha com ID: ${id}`);
-    }
 
     return (
 
-        <Box m="0 20px">
+        <Box m="0 20px" >
             <Box display={"flex"} justifyContent={'space-between'} alignItems={'center'}>
                 <Header titulo="Usuários" show={false} espaco={"25px"} />
-                <Button variant="contained" sx={{height: '50%'}}>
-                    <Link to={'cadastro'} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Link to={'cadastro'} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Button variant="contained" sx={{height: '50%'}}>
                         Cadastrar novo usuário
-                    </Link>
-                </Button>
+                    </Button>
+                </Link>
             </Box>
-            <Box sx={{ width: '100%', "& .MuiDataGrid-columnHeaders": {backgroundColor: theme.palette.neutral.main} }}>
+            <Box sx={{ "& .MuiDataGrid-columnHeaders": {backgroundColor: theme.palette.neutral.main} }}>
                 <DataGrid
                     rows={novosDados}
                     getRowId={(row) => row.nome}

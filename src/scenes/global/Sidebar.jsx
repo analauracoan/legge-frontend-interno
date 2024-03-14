@@ -6,7 +6,6 @@ import { Menu, MenuItem } from "react-pro-sidebar";
 import { ProSidebar } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
-import 'react-pro-sidebar/dist/css/styles.css';
 import logo from '../../assets/logo_escrita.svg';
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ViewListIcon from '@mui/icons-material/ViewList';
@@ -20,10 +19,11 @@ import { AuthContext } from "../../contexts/Auth/AuthContext";
 import "react-pro-sidebar/dist/css/styles.css";
 
 const Sidebar = () => {
+
     const theme = useMemo(() => createTheme(themeSettings()), []);
     const colors = theme.palette;
-    
-    const [isCollapsed, setIsCollapsed] = useState(false);
+
+    const [isCollapsed, setIsCollapsed] = useState(false)
     const [isMenuNormaOpen, setIsMenuNormaOpen] = useState(true);
     const [isMenuAdmOpen, setIsMenuAdmOpen] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);
@@ -38,7 +38,6 @@ const Sidebar = () => {
             setIsAdmin(false);
         }
     })
-
 
     return (
 
@@ -163,8 +162,8 @@ const Sidebar = () => {
                 </Menu>
             </ProSidebar>
         </Box>
-
     );
 };
 
 export default Sidebar;
+

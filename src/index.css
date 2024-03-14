@@ -2,8 +2,8 @@
 
 html,
 body,
-#root,
-.app,
+#root
+
 .content {
   height: 100%;
   width: 100%;
@@ -13,4 +13,6 @@ body,
 .app {
   display: flex;
   position: relative;
+  height: 100vh;
+  width: 100vw;
 }
